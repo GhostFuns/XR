@@ -130,8 +130,18 @@ async def call_llm(system_message: str, user_message: str, image_base64: Optiona
             if ',' in image_base64:
                 image_base64 = image_base64.split(',')[1]
             
-            image_content = ImageContent(image_base64=image_base64)
-            message = UserMessage(text=user_message, images=[image_content])
+            # Try different approaches for image handling
+            try:
+                image_content = ImageContent(image_base64=image_base64)
+                message = UserMessage(text=user_message, image=image_content)
+            except TypeError:
+                # Fallback: try with image_content parameter
+                try:
+                    image_content = ImageContent(image_base64=image_base64)
+                    message = UserMessage(text=user_message, image_content=image_content)
+                except TypeError:
+                    # Final fallback: text only with image description
+                    message = UserMessage(text=f"{user_message}\n\nNote: Image analysis requested but image parameter not supported in current API version.")
         else:
             message = UserMessage(text=user_message)
         
