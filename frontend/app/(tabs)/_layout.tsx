@@ -48,7 +48,7 @@ export default function TabLayout() {
         options={{
           title: 'Memory',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="brain-outline" size={size} color={color} />
+            <Ionicons name="hardware-chip-outline" size={size} color={color} />
           ),
         }}
       />

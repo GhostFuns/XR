@@ -273,7 +273,7 @@ const getWidgetIcon = (widgetId: string): keyof typeof Ionicons.glyphMap => {
     translation: 'language-outline',
     object_recognition: 'eye-outline',
     social_cues: 'chatbubbles-outline',
-    memory: 'brain-outline',
+    memory: 'hardware-chip-outline',
   };
   return icons[widgetId] || 'square-outline';
 };
