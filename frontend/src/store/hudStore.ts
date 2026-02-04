@@ -23,19 +23,19 @@ interface HUDState {
   widgets: HUDWidget[];
   
   // Features
-  autoTranslate: bool;
-  contextualMemoryEnabled: bool;
-  voiceFeedback: bool;
-  hapticFeedback: bool;
+  autoTranslate: boolean;
+  contextualMemoryEnabled: boolean;
+  voiceFeedback: boolean;
+  hapticFeedback: boolean;
   
   // Real-time data
-  isListening: bool;
-  isProcessing: bool;
+  isListening: boolean;
+  isProcessing: boolean;
   lastTranslation: string | null;
   lastRecognition: any | null;
   
   // Connection
-  isConnected: bool;
+  isConnected: boolean;
   connectionStatus: 'connected' | 'connecting' | 'disconnected';
   
   // Actions
@@ -44,12 +44,12 @@ interface HUDState {
   setHudOpacity: (opacity: number) => void;
   setTheme: (theme: 'dark_cyber' | 'minimal' | 'high_contrast') => void;
   toggleWidget: (widgetId: string) => void;
-  setAutoTranslate: (enabled: bool) => void;
-  setContextualMemory: (enabled: bool) => void;
-  setVoiceFeedback: (enabled: bool) => void;
-  setHapticFeedback: (enabled: bool) => void;
-  setIsListening: (listening: bool) => void;
-  setIsProcessing: (processing: bool) => void;
+  setAutoTranslate: (enabled: boolean) => void;
+  setContextualMemory: (enabled: boolean) => void;
+  setVoiceFeedback: (enabled: boolean) => void;
+  setHapticFeedback: (enabled: boolean) => void;
+  setIsListening: (listening: boolean) => void;
+  setIsProcessing: (processing: boolean) => void;
   setLastTranslation: (translation: string | null) => void;
   setLastRecognition: (recognition: any | null) => void;
   setConnectionStatus: (status: 'connected' | 'connecting' | 'disconnected') => void;
