@@ -59,11 +59,14 @@ export default function RecognizeScreen() {
 
     setIsAnalyzing(true);
     try {
+      console.log('Sending image to API...');
       const result = await recognizeObjects(capturedImage);
+      console.log('Got result:', result);
       setRecognitionResult(result);
       setLastRecognition(result);
     } catch (error: any) {
-      Alert.alert('Analysis Error', error.message || 'Failed to analyze image');
+      console.error('Analysis error:', error);
+      Alert.alert('Analysis Error', error.response?.data?.detail || error.message || 'Failed to analyze image. Check your internet connection.');
     } finally {
       setIsAnalyzing(false);
     }
