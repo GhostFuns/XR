@@ -25,11 +25,11 @@ Before every build, **delete your existing project folder** and re-clone fresh:
 cd ~/projects
 
 # Remove old folder (if exists)
-rm -rf world-hud
+rm -rf XR
 
 # Fresh clone
-git clone [YOUR_REPO_URL] world-hud
-cd world-hud/frontend
+git clone [YOUR_REPO_URL] XR
+cd XR/frontend
 ```
 
 ### Step 1: Install Dependencies
