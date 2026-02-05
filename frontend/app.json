@@ -17,7 +17,13 @@
         "backgroundColor": "#000000"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.worldhud.app"
+      "package": "com.worldhud.app",
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_NETWORK_STATE"
+      ]
     },
     "androidStatusBar": {
       "backgroundColor": "#000000",
@@ -44,7 +50,8 @@
         {
           "cameraPermission": "Allow World HUD to use camera for object recognition"
         }
-      ]
+      ],
+      "./plugins/withVitureSDK"
     ],
     "experiments": {
       "typedRoutes": true
