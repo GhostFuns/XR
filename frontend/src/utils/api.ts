@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = process.env.EXPO_PUBLIC_BACKEND_URL || 'https://viture-world-hud.preview.emergentagent.com';
+const API_BASE = process.env.EXPO_PUBLIC_BACKEND_URL || 'https://vitureapp.preview.emergentagent.com';
 
 export const api = axios.create({
   baseURL: `${API_BASE}/api`,

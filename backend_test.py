@@ -13,7 +13,7 @@ import sys
 from typing import Dict, Any, List
 
 # Backend URL from frontend environment
-BACKEND_URL = "https://viture-world-hud.preview.emergentagent.com/api"
+BACKEND_URL = "https://vitureapp.preview.emergentagent.com/api"
 
 class WorldHUDTester:
     def __init__(self):
