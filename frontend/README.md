@@ -1,50 +1,154 @@
-# Welcome to your Expo app 👋
+# World HUD - Viture XR Glasses App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A React Native application for Viture Luma Ultra XR Glasses featuring:
+- **Real-time Head Tracking** - Uses the glasses' IMU sensor for orientation data
+- **Two-Way Translation** - Translate speech between English and Mexican Spanish, Japanese, German, or Russian
+- **Object Recognition** - Camera-based object identification with AI analysis
+- **Contextual Memory** - Save and retrieve recognized objects
 
-## Get started
+## Prerequisites
 
-1. Install dependencies
+- Node.js 18+ 
+- EAS CLI: `npm install -g eas-cli`
+- Expo account: `eas login`
+- Samsung Galaxy S25+ (or compatible Android device)
+- Viture Luma Ultra XR Glasses
 
-   ```bash
-   npm install
-   ```
+## Building the APK (From Termux/Phone)
 
-2. Start the app
+### IMPORTANT: Fresh Clone Required
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+Before every build, **delete your existing project folder** and re-clone fresh:
 
 ```bash
-npm run reset-project
+# Navigate to your projects folder
+cd ~/projects
+
+# Remove old folder (if exists)
+rm -rf world-hud
+
+# Fresh clone
+git clone [YOUR_REPO_URL] world-hud
+cd world-hud/frontend
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Step 1: Install Dependencies
 
-## Learn more
+```bash
+# Use --legacy-peer-deps to avoid dependency conflicts
+npm install --legacy-peer-deps
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+### Step 2: Login to Expo (if not logged in)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+eas login
+```
 
-## Join the community
+### Step 3: Build the APK
 
-Join our community of developers creating universal apps.
+```bash
+# Build for Android (preview profile)
+eas build --platform android --profile preview
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Step 4: Wait and Download
+
+- The build will be queued on EAS servers
+- Build time: ~10-15 minutes
+- Download the APK when complete
+
+## Viture SDK Integration
+
+This app includes native C/C++ integration with the Viture SDK. The SDK files are located at:
+
+- **Headers**: `android/app/src/main/cpp/viture/`
+- **Native Libraries**: `android/app/src/main/jniLibs/`
+- **JNI Bridge**: `android/app/src/main/cpp/viture_jni.cpp`
+- **Kotlin Bridge**: `android/app/src/main/java/com/anonymous/frontend/viture/`
+
+### USB Connection
+
+1. Connect Viture glasses to your Samsung S25+ via USB-C
+2. Open the World HUD app
+3. Grant USB permission when prompted
+4. Tap "Connect Glasses" in the app
+
+### Supported Devices
+
+- Viture One
+- Viture Pro
+- Viture Lite
+- Viture Luma
+- Viture Luma Pro
+- Viture Beast
+
+## Troubleshooting Build Errors
+
+### "ERESOLVE unable to resolve dependency tree"
+
+Use `--legacy-peer-deps`:
+```bash
+npm install --legacy-peer-deps
+```
+
+### "package-lock.json out of sync"
+
+Delete node_modules and reinstall:
+```bash
+rm -rf node_modules package-lock.json
+npm install --legacy-peer-deps
+```
+
+### "Waiting for concurrency"
+
+Cancel old builds on expo.dev:
+1. Go to expo.dev
+2. Navigate to your project
+3. Cancel any pending/running builds
+
+### Build Fails on C++ Compilation
+
+Make sure you cloned the latest version. The project uses `react-native-reanimated@4.1.1` which is compatible with the new architecture.
+
+## Project Structure
+
+```
+frontend/
+├── app/                    # Expo Router screens
+│   └── (tabs)/            # Tab navigation
+│       ├── index.tsx      # Main HUD screen
+│       ├── recognize.tsx  # Object recognition
+│       ├── translate.tsx  # Translation feature
+│       ├── memory.tsx     # Saved memories
+│       └── settings.tsx   # App settings
+├── src/
+│   ├── components/        # Reusable UI components
+│   ├── hooks/             # Custom hooks (useViture)
+│   ├── native/            # Native module wrappers
+│   ├── store/             # Zustand state management
+│   └── utils/             # API utilities
+├── android/               # Native Android code
+│   └── app/src/main/
+│       ├── cpp/           # C++ source code
+│       ├── java/          # Kotlin modules
+│       └── jniLibs/       # Precompiled .so libraries
+└── plugins/               # Expo config plugins
+    └── withVitureSDK.js   # Viture SDK integration
+```
+
+## Development
+
+For local development with native code:
+
+```bash
+# Generate native project
+npx expo prebuild --clean
+
+# Run on connected device
+npx expo run:android
+```
+
+## License
+
+MIT
